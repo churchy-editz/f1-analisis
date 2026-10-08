@@ -1,0 +1,18 @@
+# Entorno virtual
+.venv/
+
+# Cache de FastF1 (se regenera al descargar datos)
+cache/*
+!cache/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor / SO
+.vscode/
+.DS_Store
+Thumbs.db
