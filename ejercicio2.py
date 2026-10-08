@@ -13,14 +13,12 @@ session.load(telemetry=False, weather=False, messages=False)
 # Objetivo: comparar el ritmo REAL de dos pilotos, quitando las vueltas "raras".
 
 # 1. Elige dos pilotos (por ejemplo "NOR" y "LEC") y guarda sus vueltas en dos variables.
-# TODO
 
 piloto1 = "NOR"
 piloto2 = "LEC"
 
 # 2. Convierte LapTime a segundos en una columna nueva llamada "Segundos".
 #    Pista: .dt.total_seconds()
-# TODO
 
 vueltas_piloto1 = session.laps.pick_drivers(piloto1).copy()
 vueltas_piloto1["Segundos"] = vueltas_piloto1["LapTime"].dt.total_seconds()
@@ -36,7 +34,6 @@ print(vueltas_piloto2)
 #    - sin la vuelta 1 (la salida es más lenta)
 #    - sin vueltas más de un 107 % más lentas que su mediana (coche de seguridad, errores...)
 #    Pista: calcula la mediana de "Segundos" y úsala en un filtro.
-# TODO
 
 vueltas_limpias_piloto1 = vueltas_piloto1[(vueltas_piloto1['PitOutTime'].isna() & vueltas_piloto1['PitInTime'].isna()) & 
                                           (vueltas_piloto1['LapNumber'] != 1) & (vueltas_piloto1['Segundos'] <= 1.07 * vueltas_piloto1['Segundos'].median())]
@@ -49,7 +46,6 @@ print(vueltas_limpias_piloto2)
 
 # 4. Para cada piloto, imprime en una tabla: nº de vueltas limpias,
 #    media y mediana de "Segundos". Pista: .agg([...]) o un DataFrame hecho a mano.
-# TODO
 
 tabla_piloto1 = pd.DataFrame({
     "Piloto": [piloto1],
@@ -70,7 +66,6 @@ print(tabla_piloto2)
 
 # 5. Respuesta (como comentario): ¿quién tuvo mejor ritmo? ¿Cambia la conclusión si
 #    usas la media o la mediana? ¿Por qué?
-# TODO
 
 # El mejor ritmo lo tuvo NOR (piloto 1): media 88.517 s y mediana 88.362 s, frente a
 # LEC con 88.944 s y 88.565 s. El sentido de la conclusión no cambia con la media o la
@@ -99,11 +94,6 @@ ax.set_title(f"Ritmo de {piloto1} y {piloto2} en {session.event['EventName']} {s
 ax.set_xlabel("Número de Vuelta")
 ax.set_ylabel("Segundos")
 ax.legend()
-
-
-# TODO (tuyo): ponle título con ax.set_title(...), nombres a los ejes con
-#              ax.set_xlabel(...) y ax.set_ylabel(...), y la leyenda con ax.legend().
-#              Opcional: ax.grid(True), colores con color="...", marcadores con marker="o".
 
 # Guarda la imagen. bbox_inches="tight" evita que se recorten los bordes.
 fig.savefig(carpeta_graficos / "ritmo.png", dpi=150, bbox_inches="tight")
